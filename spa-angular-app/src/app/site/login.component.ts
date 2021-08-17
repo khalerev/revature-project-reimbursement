@@ -13,7 +13,7 @@ export class LoginComponent {
 
     onSubmit(form:NgForm){
         console.log(form);
-        this.http.post('http://localhost:9080/api-servlet-app/login',
+        this.http.post('http://localhost:8090/api-servlet-app/login',
             JSON.stringify({username:form.value.username,password:form.value.password}))
             .subscribe({
                 next: (data:any)=>{
