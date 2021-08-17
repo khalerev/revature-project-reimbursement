@@ -28,7 +28,7 @@ export class TicketsComponent implements OnInit {
         this.tickets = this.tickets.filter(t => t.employeeId == this.id);
         this.tickets.forEach(t => {
           t.timestamp = new Date(t.timestamp).toString();
-          if (this.maxId < t.ticketId) {
+          if (this.maxId <= t.ticketId) {
             this.maxId = t.ticketId + 1;
           }
         });
@@ -52,7 +52,7 @@ export class TicketsComponent implements OnInit {
     };
     this.http.post('http://localhost:8090/api-servlet-app/tickets',JSON.stringify(ticket)).subscribe({
       next: (data)=>{
-        
+        this.fetchTickets()
       }
     });
   }
