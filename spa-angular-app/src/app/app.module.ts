@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { MenusComponent } from './menus/menus.component';
+import { TicketsComponent } from './tickets/tickets.component';
 import { LoginComponent } from './site/login.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './site/home.component';
@@ -13,7 +14,11 @@ import { AuthGuard } from './site/auth.guard';
 
 const routes:Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard], children: 
-    [{ path: 'menus', component: MenusComponent }] },
+    [
+      { path: 'menus', component: MenusComponent },
+      { path: 'tickets', component: TicketsComponent }
+    ]
+  },
   { path: 'login', component: LoginComponent }
 ]
 
@@ -21,6 +26,7 @@ const routes:Routes = [
   declarations: [
     AppComponent,
     MenusComponent,
+    TicketsComponent,
     LoginComponent,
     HomeComponent
   ],

@@ -10,15 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import common.model.Employee;
 import common.model.User;
 import common.util.AppConstants;
 import common.util.HttpUtil;
+import manager.EmployeeManager;
 import manager.UserManager;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-	private UserManager manager = new UserManager();
+	private EmployeeManager manager = new EmployeeManager();
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,10 +29,10 @@ public class LoginServlet extends HttpServlet {
 			ObjectMapper mapper = new ObjectMapper();
 			User user = mapper.readValue(HttpUtil.getJSONData(req), User.class);
 			//persist data to backend
-			boolean success = manager.login(user.getUsername(), user.getPassword());
+			Employee success = manager.login(user.getUsername(), user.getPassword());
 			//send success response to client
-			
-			resp.getWriter().print( "{\"status\":"+ (success ? "\"success\"" : "\"failure\"") + "}");
+			String jsonResponse = mapper.writeValueAsString(success);
+			resp.getWriter().print(jsonResponse);
 			resp.setStatus(AppConstants.HTTP_OK);
 		} catch (Exception e) {
 			//send failure response to client

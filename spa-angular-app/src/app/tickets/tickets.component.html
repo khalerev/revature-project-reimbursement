@@ -1,0 +1,12 @@
+<h4>Tickets</h4>
+
+<div>
+    <form (ngSubmit)="submitTicket(f)" #f="ngForm">
+        <p>Ticket Type: <input type="text" name="type" ngModel></p>
+        <p>Amount: <input type="number" name="amount" ngModel></p>
+        <p>Description: <input type="text" name="description" ngModel></p>
+        <button type="submit">Add New Ticket</button>
+    </form>
+</div>
+
+<div *ngFor="let ticket of tickets"> Ticket ID: {{ticket.ticketId}}, Employee ID: {{ticket.employeeId}}, Type: {{ticket.type}}, Amount: {{ticket.amount}}, Description: {{ticket.description}}, Timestamp: {{ticket.timestamp}}</div>

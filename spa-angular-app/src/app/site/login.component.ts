@@ -17,8 +17,9 @@ export class LoginComponent {
             JSON.stringify({username:form.value.username,password:form.value.password}))
             .subscribe({
                 next: (data:any)=>{
-                    if(data.status === 'success') {
+                    if(data.id) {
                         localStorage.setItem("username", form.value.username);
+                        localStorage.setItem("userid", data.id);
                     }
                     this.router.navigate([''])
                 }
